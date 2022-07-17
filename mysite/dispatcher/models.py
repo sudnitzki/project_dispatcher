@@ -8,6 +8,10 @@ class Producer(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Producer"
+        verbose_name_plural = "Producers"
+
 
 class Trailer(models.Model):
 
@@ -23,6 +27,11 @@ class Trailer(models.Model):
     def get_absolute_url(self):
         
         return reverse('trailer-detail', args=[str(self.id)])
+
+    def display_producer(self):
+        return ', '.join(producer.name for producer in self.producer.all()[:3])
+    
+    display_producer.short_description = "Producer"
 
 
 class TrailerInstance(models.Model):
