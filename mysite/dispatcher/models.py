@@ -18,7 +18,7 @@ class Trailer(models.Model):
     type = models.CharField('Type', max_length=200, null=True, blank=True)
     features = models.ForeignKey('Features', on_delete=models.SET_NULL, null=True)
     summary = models.TextField('Summary', max_length=1000, help_text='Other information', null=True, blank=True)
-    platenr = models.CharField('Plate number', max_length=6, help_text='Plate number', null=True, blank=True)
+    platenr = models.CharField('Plate number', max_length=5, help_text='Plate number', null=True, blank=True)
     producer = models.ManyToManyField(Producer, help_text='Enter the Name of the producer')
 
     def __str__(self):
@@ -64,8 +64,8 @@ class TrailerInstance(models.Model):
 
 class Features(models.Model):
     
-    volume = models.CharField('Volume m3', max_length=100)
-    axles = models.CharField('Number of axles', max_length=100)
+    volume = models.CharField('Volume m3', max_length=2)
+    axles = models.CharField('Number of axles', max_length=1)
 
     class Meta:
         ordering = ['axles', 'volume']

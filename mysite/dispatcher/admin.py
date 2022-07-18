@@ -4,6 +4,8 @@ from .models import Features, Producer, Trailer, TrailerInstance
 
 class TrailerInstanceInline(admin.TabularInline):
     model = TrailerInstance
+    readonly_fields = ('id',)
+    can_delete = False
     extra = 0
 
 
