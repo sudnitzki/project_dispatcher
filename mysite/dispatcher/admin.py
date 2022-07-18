@@ -21,8 +21,12 @@ class TrailerInstanceAdmin(admin.ModelAdmin):
         ('Availability', {'fields': ('status', 'dexpected_return')}),
     )
 
+
+class FeaturesAdmin(admin.ModelAdmin):
+    list_display = ('axles', 'volume', 'display_trailers')
+
 admin.site.register(Trailer, TrailerAdmin)
-admin.site.register(Features)
+admin.site.register(Features, FeaturesAdmin)
 admin.site.register(Producer)
 admin.site.register(TrailerInstance)
 

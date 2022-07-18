@@ -16,7 +16,7 @@ class Producer(models.Model):
 class Trailer(models.Model):
 
     type = models.CharField('Type', max_length=200, null=True, blank=True)
-    features = models.ForeignKey('Features', on_delete=models.SET_NULL, null=True)
+    features = models.ForeignKey('Features', on_delete=models.SET_NULL, null=True, related_name='trailers')
     summary = models.TextField('Summary', max_length=1000, help_text='Other information', null=True, blank=True)
     platenr = models.CharField('Plate number', max_length=5, help_text='Plate number', null=True, blank=True)
     producer = models.ManyToManyField(Producer, help_text='Enter the Name of the producer')
@@ -73,6 +73,12 @@ class Features(models.Model):
     def get_absolute_url(self):
         
         return reverse('trailer-detail', args=[str(self.id)])
+
+    def display_trailers(self):
+        return ', '.join(trailer.type for trailer in self.trailers.all()[:3])
+
+    display_trailers.short_description = 'Trailers'    
+    
 
     def __str__(self):
         """String for representing the Model object."""
