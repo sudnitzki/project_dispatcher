@@ -14,7 +14,9 @@ class TrailerAdmin(admin.ModelAdmin):
 
 class TrailerInstanceAdmin(admin.ModelAdmin):
     list_display = ('trailer', 'status', 'dexpected_return')
+    list_editable = ('dexpected_return', 'status')
     list_filter = ('status', 'dexpected_return')
+    search_fields = ('id', 'trailer__type')
 
     fieldsets = (
         ('General', {'fields': ('uuid', 'trailer')}),
