@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Fleet</h1>
+  <p>Hello!</p>
+  <p>Trailers</p>
+  <ul>
+    <li><strong>Trailers:</strong> {{ num_trailers }}</li>
+    <li><strong>Egzempliorių:</strong> {{ num_instances }}</li>
+    <li><strong>Free trailers:</strong> {{ num_instances_available }}</li>
+    <li><strong>Autorių:</strong> {{ num_features }}</li>
+  </ul>
+{% endblock %}

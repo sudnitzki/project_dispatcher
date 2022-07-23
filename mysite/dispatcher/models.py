@@ -25,7 +25,6 @@ class Trailer(models.Model):
         return self.type
     
     def get_absolute_url(self):
-        
         return reverse('trailer-detail', args=[str(self.id)])
 
     def display_producer(self):
