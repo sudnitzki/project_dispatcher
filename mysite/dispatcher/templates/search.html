@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Search "{{query}}" results:</h1>
+  </br>
+  {% if trailers %}
+  <ul>
+    {% for trailer in trailers %}
+      <li>
+        <a href="{{ trailer.id }}">{{ trailer.type }}</a> ({{trailer.features}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. No results :(</p>
+  {% endif %}
+
+  {% endblock %}

@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import Trailer, Features, TrailerInstance, Producer
 from django.views import generic
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
     
@@ -43,8 +45,16 @@ def feature(request, feature_id):
     return render(request, 'feature.html', {'feature': single_feature})
 
 
+def search(request):
+
+    query = request.GET.get('query')
+    search_results = Trailer.objects.filter(Q(type__icontains=query) | Q(summary__icontains=query))
+    return render(request, 'search.html', {'trailer': search_results, 'query': query})
+
+
 class TrailerListView(generic.ListView):
     model = Trailer
+    paginate_by = 2
     template_name = 'trailer_list.html'
 
 class TrailerDetailView(generic.DetailView):

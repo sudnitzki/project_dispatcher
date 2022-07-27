@@ -7,5 +7,6 @@ urlpatterns = [
     path('feature/<int:feature_id>', views.feature, name='feature'),
     path('trailers/', views.TrailerListView.as_view(), name='trailers'),
     path('trailers/<int:pk>', views.TrailerDetailView.as_view(), name='trailer-detail'),
+    path('search/', views.search, name='search'),
 
 ]
