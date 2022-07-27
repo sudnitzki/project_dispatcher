@@ -39,7 +39,7 @@ def features(request):
 
 
 def feature(request, feature_id):
-    single_feature = get_object_or_404(Feature, pk=feature_id)
+    single_feature = get_object_or_404(Features, pk=feature_id)
     return render(request, 'feature.html', {'feature': single_feature})
 
 
