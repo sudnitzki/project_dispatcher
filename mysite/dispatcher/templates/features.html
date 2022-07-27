@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Trailers features</h1>
 
-  {% for a in authors %}
-    <li>{{volume}} {{axles}}</li>
+  {% for a in features %}
+    <li><a href="{% url 'feature' a.id %}">{{a.volume}} {{a.axles}}</a></li>
     {% endfor %}
 {% endblock %}

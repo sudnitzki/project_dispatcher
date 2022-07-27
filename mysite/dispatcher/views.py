@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Trailer, Features, TrailerInstance, Producer
 from django.views import generic
-
+from django.shortcuts import render, get_object_or_404
 
 def index(request):
     
@@ -36,6 +36,11 @@ def features(request):
     }
     print(features)
     return render(request, 'features.html', context=context)
+
+
+def feature(request, feature_id):
+    single_feature = get_object_or_404(Feature, pk=feature_id)
+    return render(request, 'feature.html', {'feature': single_feature})
 
 
 class TrailerListView(generic.ListView):

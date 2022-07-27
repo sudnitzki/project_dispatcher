@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ trailer.type }}</h1>
+
+  <p><strong>Feature:</strong> <a href="{% url 'feature' trailer.features.pk %}">{{ trailer.feature }}</a></p>
+  <p><strong>Summary:</strong> {{ trailer.summary }}</p>
+  <p><strong>Plate Number:</strong> {{ trailer.platenr }}</p> 
+  <p><strong>Producer:</strong> {{ trailer.producer.all|join:", " }}</p>  
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Kopijos:</h4>
+
+    {% for copy in trailer.trailerinstance_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'tri' %}text-success{% elif copy.status == 'rea' %}text-danger{% else %}text-warning{% endif %}">
+        {{ copy.get_status_display }}
+      </p>
+      {% if copy.status != 'tri' %}
+        <p><strong>Bus grąžinta:</strong> {{ copy.dexpected_return }}</p>
+      {% endif %}
+      <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

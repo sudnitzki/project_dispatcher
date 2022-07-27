@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Knygų sąrašas</h1>
-  {% if book_list %}
+  <h1>Trailers</h1>
+  {% if trailer_list %}
   <ul>
-    {% for book in book_list %}
+    {% for trailer in trailer_list %}
       <li>
-        <a href="{{ book.id }}">{{ book.title }}</a> ({{book.author}})
+        <a href="{{ trailer.id }}">{{ trailer.type }}</a> ({{trailer.feature}})
       </li>
     {% endfor %}
   </ul>
   {% else %}
-    <p>Bibliotekoje knygų nėra.</p>
+    <p> No Trailers</p>
   {% endif %}
 {% endblock %}

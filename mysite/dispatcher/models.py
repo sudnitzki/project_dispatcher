@@ -58,7 +58,7 @@ class TrailerInstance(models.Model):
         ordering = ['dexpected_return']
 
     def __str__(self):
-        return f'{self.id} ({self.booktrailer.type})'
+        return f'{self.id} ({self.trailer.type})'
 
 
 class Features(models.Model):
