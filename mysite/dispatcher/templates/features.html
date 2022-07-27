@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Trailers features</h1>
+
+  {% for a in authors %}
+    <li>{{volume}} {{axles}}</li>
+    {% endfor %}
+{% endblock %}
