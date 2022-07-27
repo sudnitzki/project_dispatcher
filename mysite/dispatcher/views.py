@@ -48,8 +48,9 @@ def feature(request, feature_id):
 def search(request):
 
     query = request.GET.get('query')
-    search_results = Trailer.objects.filter(Q(type__icontains=query) | Q(summary__icontains=query))
-    return render(request, 'search.html', {'trailer': search_results, 'query': query})
+    query_filter = Q(type__icontains=query) | Q(summary__icontains=query)
+    search_results = Trailer.objects.filter(query_filter)
+    return render(request, 'search.html', {'trailers': search_results, 'query': query})
 
 
 class TrailerListView(generic.ListView):

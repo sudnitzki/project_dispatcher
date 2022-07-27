@@ -3,7 +3,7 @@
 {% block content %}
   <h1>{{ trailer.type }}</h1>
 
-  <p><strong>Feature:</strong> <a href="{% url 'feature' trailer.features.pk %}">{{ trailer.feature }}</a></p>
+  <p><strong>Feature:</strong> <a href="{% url 'feature' trailer.features.pk %}">{{ trailer.features }}</a></p>
   <p><strong>Summary:</strong> {{ trailer.summary }}</p>
   <p><strong>Plate Number:</strong> {{ trailer.platenr }}</p> 
   <p><strong>Producer:</strong> {{ trailer.producer.all|join:", " }}</p>  
