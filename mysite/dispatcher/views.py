@@ -7,6 +7,10 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.contrib.auth.forms import User
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
 
 def index(request):
     
@@ -66,3 +70,30 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
     
     def get_queryset(self):
         return TrailerInstance.objects.filter(company=self.request.user).filter(status__exact='tri').order_by('dexpected_return')
+
+
+@csrf_protect
+def register(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+
+        if password == password2:
+
+            if User.objects.filter(username=username).exists():
+                messages.error(request, f'Urer name {username} already exists!')
+                return redirect('register')
+            else:
+
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, f'email {email} already exists!')
+                    return redirect('register')
+                else:
+                   
+                    User.objects.create_user(username=username, email=email, password=password)
+        else:
+            messages.error(request, 'error password!')
+            return redirect('register')
+    return render(request, 'register.html')
