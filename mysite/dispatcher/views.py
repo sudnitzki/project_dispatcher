@@ -6,6 +6,7 @@ from django.views import generic
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     
@@ -57,3 +58,11 @@ class TrailerListView(generic.ListView):
 class TrailerDetailView(generic.DetailView):
     model = Trailer
     template_name = 'trailer_detail.html'
+
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    model = TrailerInstance
+    template_name ='user_trailers.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return TrailerInstance.objects.filter(company=self.request.user).filter(status__exact='tri').order_by('dexpected_return')

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My trailers</h1>
+
+    {% if trailerinstance_list %}
+    <ul>
+
+      {% for trailerinst in trailerinstance_list %} 
+      <li class="{% if trailerinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'trailer-detail' trailerinst.book.pk %}">{{trailerinst.trailer.type}}</a> ({{ trailerinst.dexpected_return}})        
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>No trailers</p>
+    {% endif %}       
+{% endblock %}

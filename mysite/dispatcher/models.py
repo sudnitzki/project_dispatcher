@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
 
 class Producer(models.Model):
     name = models.CharField('Brand', max_length=200, help_text='Enter the Name of the Producer (e.g. Lamberet)', null=True, blank=True)
@@ -38,6 +40,7 @@ class TrailerInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Dispatchers ID for the Trailer')
     trailer = models.ForeignKey('Trailer', on_delete=models.SET_NULL, null=True) 
     dexpected_return = models.DateField('Will be available', null=True, blank=True)
+    company = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
         ('ser', 'Service'),
@@ -56,6 +59,12 @@ class TrailerInstance(models.Model):
 
     class Meta:
         ordering = ['dexpected_return']
+
+    @property
+    def is_overdue(self):
+        if self.dexpected_return and date.today() > self.dexpected_return:
+            return True
+        return False
 
     def __str__(self):
         return f'{self.id} ({self.trailer.type})'

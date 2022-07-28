@@ -19,8 +19,12 @@ class TrailerInstanceAdmin(admin.ModelAdmin):
     search_fields = ('id', 'trailer__type')
 
     fieldsets = (
-        ('General', {'fields': ('uuid', 'trailer')}),
-        ('Availability', {'fields': ('status', 'dexpected_return')}),
+        (None, {
+            'fields': ('trailer', 'id')
+        }),
+        ('Availability', {
+            'fields': ('status', 'dexpected_return', 'company')
+        }),
     )
 
 
