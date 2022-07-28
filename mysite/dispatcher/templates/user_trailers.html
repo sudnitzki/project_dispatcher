@@ -8,7 +8,7 @@
 
       {% for trailerinst in trailerinstance_list %} 
       <li class="{% if trailerinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'trailer-detail' trailerinst.book.pk %}">{{trailerinst.trailer.type}}</a> ({{ trailerinst.dexpected_return}})        
+        <a href="{% url 'trailer-detail' trailerinst.trailer.pk %}">{{trailerinst.trailer.type}}</a> ({{ trailerinst.dexpected_return}})        
       </li>
       {% endfor %}
     </ul>
