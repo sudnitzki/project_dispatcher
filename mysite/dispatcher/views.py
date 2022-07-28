@@ -12,19 +12,15 @@ def index(request):
     
     num_trailers = Trailer.objects.all().count()
     num_instances = TrailerInstance.objects.all().count()
-    
-    
-    num_instances_available = TrailerInstance.objects.filter(status__exact='rea').count()
-    
-     
-    num_features = Features.objects.count()
+    num_instances_available = TrailerInstance.objects.filter(status__exact='rea').count()  
+    num_producer = Producer.objects.count()
     
     
     context = {
         'num_trailers': num_trailers,
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
-        'num_features': num_features,
+        'num_producer': num_producer,
     }
 
     # renderiname index.html, su duomenimis kintamąjame context
